@@ -72,7 +72,9 @@ namespace MKCache
             // Item not found.
 
             value = factory();
-            _cache.Set(key, value, expirationRelativeToUtcNow);
+
+            if (value is not null)
+                _cache.Set(key, value, expirationRelativeToUtcNow);
 
             return value;
         }
@@ -88,7 +90,9 @@ namespace MKCache
             // Item not found.
 
             value = await FetchAsync(key, asyncFactory);
-            _cache.Set(key, value, expirationRelativeToUtcNow);
+
+            if (value is not null)
+                _cache.Set(key, value, expirationRelativeToUtcNow);
 
             return value;
         }
