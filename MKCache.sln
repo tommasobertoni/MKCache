@@ -9,6 +9,8 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "tests", "tests", "{75953063
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MKCache", "src\MKCache\MKCache.csproj", "{E67C2A10-097A-4151-B8AF-9EFCE6FAAD03}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MKCache.Tests", "tests\MKCache.Tests\MKCache.Tests.csproj", "{BCB3618C-D20E-4752-AA3A-A2399D0C1816}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -19,12 +21,17 @@ Global
 		{E67C2A10-097A-4151-B8AF-9EFCE6FAAD03}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{E67C2A10-097A-4151-B8AF-9EFCE6FAAD03}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{E67C2A10-097A-4151-B8AF-9EFCE6FAAD03}.Release|Any CPU.Build.0 = Release|Any CPU
+		{BCB3618C-D20E-4752-AA3A-A2399D0C1816}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{BCB3618C-D20E-4752-AA3A-A2399D0C1816}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{BCB3618C-D20E-4752-AA3A-A2399D0C1816}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{BCB3618C-D20E-4752-AA3A-A2399D0C1816}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
 	EndGlobalSection
 	GlobalSection(NestedProjects) = preSolution
 		{E67C2A10-097A-4151-B8AF-9EFCE6FAAD03} = {832ACE7B-14DF-4DDC-BF95-85652151FAA4}
+		{BCB3618C-D20E-4752-AA3A-A2399D0C1816} = {75953063-0BF3-43EB-A08F-E676250C31BE}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {85D0384A-5B5B-4D61-803C-22A0B4390C12}
