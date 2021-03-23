@@ -3,7 +3,7 @@ using Microsoft.Extensions.Caching.Memory;
 
 namespace MKCache.Abstraction
 {
-    public class Single<T> : ICache<T>
+    internal class Single<T> : ICache<T>
     {
         private readonly MemoryCacheOptions _options;
         private IMemoryCache _cache;

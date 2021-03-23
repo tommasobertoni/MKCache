@@ -2,7 +2,7 @@
 
 namespace MKCache.Abstraction
 {
-    public interface ICache<T> : IDisposable
+    internal interface ICache<T> : IDisposable
     {
         bool TryGetValue(object key, out T? value);
 
