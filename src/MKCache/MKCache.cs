@@ -45,7 +45,7 @@ namespace MKCache
         /// <param name="options">Options for the memory cache.</param>
         /// <param name="keyIdentifiers">The <see cref="KeyIdentifier"/>s to be used, one for each key.</param>
         public MKCache(MemoryCacheOptions options, params KeyIdentifier[] keyIdentifiers)
-            : this(options, keyIdentifiers.AsReadOnly())
+            : this(options, AsReadOnly(keyIdentifiers))
         {
         }
 
@@ -188,5 +188,7 @@ namespace MKCache
 
             return result;
         }
+
+        private static IReadOnlyList<TItem> AsReadOnly<TItem>(IReadOnlyList<TItem> list) => list;
     }
 }
