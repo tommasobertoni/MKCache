@@ -19,9 +19,9 @@ namespace MKCache.Abstraction
             return _cache.TryGetValue(key, out value);
         }
 
-        public void Set(object key, T value, TimeSpan absoluteExpirationRelativeToNow)
+        public void Set(object key, T value, TimeSpan expirationRelativeToNow)
         {
-            _cache.Set(key, value, absoluteExpirationRelativeToNow);
+            _cache.Set(key, value, expirationRelativeToNow);
         }
 
         public void Dispose() => _cache.Dispose();

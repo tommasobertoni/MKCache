@@ -112,12 +112,12 @@ namespace MKCache
         /// </summary>
         /// <param name="key">The key used to search for the item.</param>
         /// <param name="factory">A delegate returning the item, if not found in the cache.</param>
-        /// <param name="expirationRelativeToUtcNow">Defines how long the cached item should last for, relative to UTC now.</param>
+        /// <param name="expirationRelativeToNow">Defines how long the cached item should last for, relative to now.</param>
         /// <returns>The the newly created or cached item.</returns>
         public virtual T GetOrCreate(
             string key,
             Func<T> factory,
-            TimeSpan expirationRelativeToUtcNow)
+            TimeSpan expirationRelativeToNow)
         {
             var found = _cache.TryGetValue(key, out var value);
             if (found) return value!;
@@ -127,7 +127,7 @@ namespace MKCache
             value = factory();
 
             if (value is not null)
-                _cache.Set(key, value, expirationRelativeToUtcNow);
+                _cache.Set(key, value, expirationRelativeToNow);
 
             return value;
         }
@@ -138,12 +138,12 @@ namespace MKCache
         /// </summary>
         /// <param name="key">The key used to search for the item.</param>
         /// <param name="asyncFactory">A delegate returning asynchronously the item, if not found in the cache.</param>
-        /// <param name="expirationRelativeToUtcNow">Defines how long the cached item should last for, relative to UTC now.</param>
+        /// <param name="expirationRelativeToNow">Defines how long the cached item should last for, relative to now.</param>
         /// <returns>The the newly created or cached item.</returns>
         public virtual async Task<T> GetOrCreateAsync(
             object key,
             Func<Task<T>> asyncFactory,
-            TimeSpan expirationRelativeToUtcNow)
+            TimeSpan expirationRelativeToNow)
         {
             var found = _cache.TryGetValue(key, out var value);
             if (found) return value!;
@@ -153,7 +153,7 @@ namespace MKCache
             value = await FetchAsync(key, asyncFactory);
 
             if (value is not null)
-                _cache.Set(key, value, expirationRelativeToUtcNow);
+                _cache.Set(key, value, expirationRelativeToNow);
 
             return value;
         }

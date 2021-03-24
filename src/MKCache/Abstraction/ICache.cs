@@ -6,7 +6,7 @@ namespace MKCache.Abstraction
     {
         bool TryGetValue(object key, out T? value);
 
-        void Set(object key, T value, TimeSpan absoluteExpirationRelativeToNow);
+        void Set(object key, T value, TimeSpan expirationRelativeToNow);
 
         void Reset();
     }
