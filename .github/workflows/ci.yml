@@ -52,9 +52,9 @@ jobs:
         uses: actions/upload-artifact@v2
         with:
           name: coverage.info
-          path: tests/MKCache.Tests/coverage/coverage.net5.0.info
+          path: tests/MKCache.Tests/coverage/coverage.info
       - name: Upload to Coveralls.io
         uses: coverallsapp/github-action@v1.1.2
         with:
           github-token: ${{ secrets.GITHUB_TOKEN }}
-          path-to-lcov: tests/MKCache.Tests/coverage/coverage.net5.0.info
+          path-to-lcov: tests/MKCache.Tests/coverage/coverage.info
