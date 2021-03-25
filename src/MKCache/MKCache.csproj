@@ -4,8 +4,27 @@
     <TargetFramework>netstandard2.0</TargetFramework>
     <LangVersion>latest</LangVersion>
     <Nullable>enable</Nullable>
+    <Version>1.0.0-rc1</Version>
     <TreatWarningsAsErrors>true</TreatWarningsAsErrors>
     <GenerateDocumentationFile>true</GenerateDocumentationFile>
+  </PropertyGroup>
+
+  <PropertyGroup>
+    <!-- Properties related to NuGet packaging -->
+    <IsPackable>True</IsPackable>
+    <PackageId>MKCache</PackageId>
+    <Authors>Tommaso Bertoni</Authors>
+    <Title>MKCache</Title>
+    <Copyright>Copyright © Tommaso Bertoni 2021</Copyright>
+    <PackageProjectUrl>https://github.com/tommasobertoni/MKCache</PackageProjectUrl>
+    <RepositoryUrl>https://github.com/tommasobertoni/MKCache</RepositoryUrl>
+    <PackageTags>cache memorycache async multikey</PackageTags>
+    <PackageReleaseNotes></PackageReleaseNotes>
+    <RepositoryType>git</RepositoryType>
+    <Description>Cache an item using more than one key.</Description>
+    <PublishRepositoryUrl>true</PublishRepositoryUrl>
+    <GeneratePackageOnBuild>false</GeneratePackageOnBuild>
+    <EmbedUntrackedSources>true</EmbedUntrackedSources>
   </PropertyGroup>
 
   <ItemGroup>
