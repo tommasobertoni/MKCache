@@ -6,13 +6,15 @@ namespace MKCache.Abstraction
     internal class Single<T> : ICache<T>
     {
         private readonly MemoryCacheOptions _options;
-        private IMemoryCache _cache;
+        private MemoryCache _cache;
 
         public Single(MemoryCacheOptions options)
         {
             _options = options;
             _cache = Create(_options);
         }
+
+        public int Count => _cache.Count;
 
         public bool TryGetValue(object key, out T? value)
         {
@@ -33,6 +35,6 @@ namespace MKCache.Abstraction
             oldCache.Dispose();
         }
 
-        private static IMemoryCache Create(MemoryCacheOptions options) => new MemoryCache(options);
+        private static MemoryCache Create(MemoryCacheOptions options) => new(options);
     }
 }

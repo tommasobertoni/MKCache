@@ -73,9 +73,9 @@ namespace MKCache
         public bool ReuseRunningAsyncFetchers { get; set; } = true;
 
         /// <summary>
-        /// Returns the number of internal caches used: one for each configured key.
+        /// Gets the count of the current item.
         /// </summary>
-        public int CachesCount => _cache is Multi<T> mc ? mc.CachesCount : 1;
+        public int Count => _cache.Count;
 
         private static ICache<T> Create(
             MemoryCacheOptions options,
@@ -102,7 +102,7 @@ namespace MKCache
         /// </summary>
         public virtual void Clear()
         {
-            _cache.Dispose();
+            _cache.Reset();
             _cache = Create(_options, _keyIdentifiers);
         }
 

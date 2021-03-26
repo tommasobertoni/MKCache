@@ -20,7 +20,7 @@ namespace MKCache.Abstraction
             _caches = Create(options, keyIdentifiers);
         }
 
-        public int CachesCount => _caches.Count;
+        public int Count => _caches.Select(x => x.Cache).Max(c => c.Count);
 
         public bool TryGetValue(object key, out T? value)
         {
@@ -43,7 +43,7 @@ namespace MKCache.Abstraction
             {
                 object key = kid(value);
 
-                if (key != null)
+                if (key is not null)
                     cache.Set(key, value, expirationRelativeToNow);
             }
         }
@@ -67,7 +67,7 @@ namespace MKCache.Abstraction
             MemoryCacheOptions options,
             IReadOnlyList<MKCache<T>.KeyIdentifier> keyIdentifiers)
         {
-            return keyIdentifiers.Select(kid => new CacheWithKid<T>(new MemoryCache(options), kid)).ToArray();
+            return keyIdentifiers.Select(kid => new CacheWithKid<T>(new(options), kid)).ToArray();
         }
     }
 }
