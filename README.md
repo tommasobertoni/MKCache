@@ -1,5 +1,12 @@
 # MKCache
-Cache an element using more than one key
+
+[![Nuget](https://img.shields.io/nuget/v/MKCache)](https://www.nuget.org/packages/MKCache)
+[![netstandard2.0](https://img.shields.io/badge/netstandard-2.0-blue)](https://docs.microsoft.com/en-us/dotnet/standard/net-standard#net-implementation-support)
+<br/>
+[![CI](https://img.shields.io/github/workflow/status/tommasobertoni/MKCache/CI/main)](https://github.com/tommasobertoni/MKCache/actions?query=workflow%3ACI+branch%3Amain)
+[![Coverage](https://img.shields.io/coveralls/github/tommasobertoni/MKCache/main)](https://coveralls.io/github/tommasobertoni/MKCache?branch=main)
+<br/>
+[![License MIT](https://img.shields.io/badge/license-MIT-green)](LICENSE)
 
 Almost called *yamc*, this is *yet another memory cache*.
 <br />
