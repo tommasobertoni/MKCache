@@ -120,6 +120,8 @@ csharp_preserve_single_line_blocks = true
 ##############################
 # Overrides                  #
 ##############################
+# CA1822: Mark members as static
+dotnet_diagnostic.CA1822.severity = none
 
 ###############################
 # VB Coding Conventions       #

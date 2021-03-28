@@ -39,7 +39,7 @@ meaning that no `Id` will never equal to an `ISOCode`.
 
 ## Usage
 
-#### with a single key
+### with no specific key
 
 ```csharp
 // This cache doesn't have any multi-key logic.
@@ -47,7 +47,7 @@ meaning that no `Id` will never equal to an `ISOCode`.
 var cache = new MKCache<Country>();
 ```
 
-#### with one or more specific keys
+### with one or more keys
 
 ```csharp
 var cache = new MKCache<Country>(
@@ -126,3 +126,5 @@ because **there's no lock** in play, but in general it will greatly improve the 
 and performances, proportionally to the amount of "twin" requests executed concurrently.
 
 This behavior can be disabled by setting `cache.ReuseRunningAsyncFetchers = false;` (default is `true`).
+
+For a running demo, check out the [sample](samples/MKCache.Sample/) project.
