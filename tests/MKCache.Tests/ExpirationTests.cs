@@ -17,7 +17,7 @@ namespace MKCache.Tests
             var factoryMock = new Mock<Func<Item>>();
             factoryMock.Setup(factory => factory()).Returns(item);
 
-            var expirySpan = TimeSpan.FromSeconds(2);
+            var expirySpan = TimeSpan.FromSeconds(1);
 
             var foundItem = cache.GetOrCreate(item.Id, factoryMock.Object, expirySpan);
             factoryMock.Verify(factory => factory(), Times.Once);
@@ -26,7 +26,7 @@ namespace MKCache.Tests
             var cachedItem = cache.GetOrCreate(item.Id, () => new Item(), expirySpan);
             Assert.Same(item, cachedItem);
 
-            await Task.Delay(expirySpan + expirySpan);
+            await Task.Delay(expirySpan * 3);
 
             var newItem = cache.GetOrCreate(item.Id, factoryMock.Object, expirySpan);
             factoryMock.Verify(factory => factory(), Times.Exactly(2));
@@ -42,7 +42,7 @@ namespace MKCache.Tests
             var asyncFactoryMock = new Mock<Func<Task<Item>>>();
             asyncFactoryMock.Setup(asyncFactory => asyncFactory()).Returns(Task.FromResult(item));
 
-            var expirySpan = TimeSpan.FromSeconds(2);
+            var expirySpan = TimeSpan.FromSeconds(1);
 
             var foundItem = await cache.GetOrCreateAsync(item.Id, asyncFactoryMock.Object, expirySpan);
             asyncFactoryMock.Verify(factory => factory(), Times.Once);
@@ -51,7 +51,7 @@ namespace MKCache.Tests
             var cachedItem = await cache.GetOrCreateAsync(item.Id, () => Task.FromResult(new Item()), expirySpan);
             Assert.Same(item, cachedItem);
 
-            await Task.Delay(expirySpan + expirySpan);
+            await Task.Delay(expirySpan * 3);
 
             var newItem = await cache.GetOrCreateAsync(item.Id, asyncFactoryMock.Object, expirySpan);
             asyncFactoryMock.Verify(factory => factory(), Times.Exactly(2));
