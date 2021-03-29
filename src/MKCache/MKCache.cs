@@ -12,7 +12,7 @@ namespace MKCache
     /// Cache items using more than one key.
     /// </summary>
     /// <typeparam name="T">The type of the items in the cache.</typeparam>
-    public class MKCache<T>
+    public class MKCache<T> : IDisposable
     {
         /// <summary>
         /// Returns the key to be used for caching the item.
@@ -188,6 +188,13 @@ namespace MKCache
 
             return result;
         }
+
+        /// <summary>
+        /// Performs application-defined tasks associated with freeing,
+        /// releasing, or resetting unmanaged resources.
+        /// The cache can't be used anymore after being disposed.
+        /// </summary>
+        public void Dispose() => _cache.Dispose();
 
         private static IReadOnlyList<TItem> AsReadOnly<TItem>(IReadOnlyList<TItem> list) => list;
     }

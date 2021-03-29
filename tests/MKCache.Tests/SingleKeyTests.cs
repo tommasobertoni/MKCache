@@ -169,5 +169,22 @@ namespace MKCache.Tests
             factoryMock.Verify(factory => factory(), Times.Exactly(2));
             Assert.Same(item, newlyCachedItem);
         }
+
+        [Fact]
+        public void Can_be_disposed()
+        {
+            var cache = new MKCache<Item>();
+
+            var item = cache.GetOrCreate("1", () => new Item(), Expiration);
+
+            cache.Dispose();
+
+            // Dispose is not Clear.
+            Assert.Equal(1, cache.Count);
+
+            // Disposed cache cannot be used anymore.
+            Assert.Throws<ObjectDisposedException>(() =>
+                cache.GetOrCreate("1", () => new Item(), Expiration));
+        }
     }
 }

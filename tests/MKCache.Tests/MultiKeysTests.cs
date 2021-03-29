@@ -38,7 +38,6 @@ namespace MKCache.Tests
             factoryMock.Setup(factory => factory()).Returns(item);
 
             var cache = new MKCache<Item>(
-                // Multi-key cache rules.
                 x => x.Id,
                 x => x.Name);
 
@@ -65,7 +64,6 @@ namespace MKCache.Tests
             asyncFactoryMock.Setup(asyncFactory => asyncFactory()).Returns(Task.FromResult(item));
 
             var cache = new MKCache<Item>(
-                // Multi-key cache rules.
                 x => x.Id,
                 x => x.Name);
 
@@ -92,7 +90,6 @@ namespace MKCache.Tests
             factoryMock.Setup(factory => factory()).Returns(item);
 
             var cache = new MKCache<Item>(
-                // Multi-key cache rules.
                 x => x.Id,
                 x => x.Name);
 
@@ -113,6 +110,25 @@ namespace MKCache.Tests
             var newlyCachedItem = cache.GetOrCreate(key, factoryMock.Object, Expiration);
             factoryMock.Verify(factory => factory(), Times.Exactly(2));
             Assert.Same(item, newlyCachedItem);
+        }
+
+        [Fact]
+        public void Can_be_disposed()
+        {
+            var cache = new MKCache<Item>(
+               x => x.Id,
+               x => x.Name);
+
+            var item = cache.GetOrCreate("1", () => new Item(), Expiration);
+
+            cache.Dispose();
+
+            // Dispose is not Clear.
+            Assert.Equal(1, cache.Count);
+
+            // Disposed cache cannot be used anymore.
+            Assert.Throws<ObjectDisposedException>(() =>
+                cache.GetOrCreate("1", () => new Item(), Expiration));
         }
     }
 }
