@@ -54,7 +54,7 @@ namespace MKCache.Abstraction
                 cache.Dispose();
         }
 
-        public void Reset()
+        public void Clear()
         {
             var oldCaches = _caches;
             _caches = Create(_options, _keyIdentifiers);

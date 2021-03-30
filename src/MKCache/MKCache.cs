@@ -21,9 +21,7 @@ namespace MKCache
         /// <returns>The cache key.</returns>
         public delegate object KeyIdentifier(T item);
 
-        private ICache<T> _cache;
-        private readonly MemoryCacheOptions _options;
-        private readonly IReadOnlyList<KeyIdentifier> _keyIdentifiers;
+        private readonly ICache<T> _cache;
         private readonly ConcurrentDictionary<object, Task<T>> _runningAsyncFetchers = new();
 
         /// <summary>
@@ -60,9 +58,9 @@ namespace MKCache
             MemoryCacheOptions options,
             IReadOnlyList<KeyIdentifier> keyIdentifiers)
         {
-            _options = options;
-            _keyIdentifiers = keyIdentifiers;
-            _cache = Create(_options, _keyIdentifiers);
+            _cache = keyIdentifiers.Any()
+                ? new Multi<T>(options, keyIdentifiers)
+                : new Single<T>(options);
         }
 
         /// <summary>
@@ -76,15 +74,6 @@ namespace MKCache
         /// Gets the count of the current item.
         /// </summary>
         public int Count => _cache.Count;
-
-        private static ICache<T> Create(
-            MemoryCacheOptions options,
-            IReadOnlyList<KeyIdentifier> keyIdentifiers)
-        {
-            return keyIdentifiers.Any()
-                ? new Multi<T>(options, keyIdentifiers)
-                : new Single<T>(options);
-        }
 
         /// <summary>
         /// Try to get an item out of the cache using the specified key.
@@ -102,8 +91,7 @@ namespace MKCache
         /// </summary>
         public virtual void Clear()
         {
-            _cache.Reset();
-            _cache = Create(_options, _keyIdentifiers);
+            _cache.Clear();
         }
 
         /// <summary>

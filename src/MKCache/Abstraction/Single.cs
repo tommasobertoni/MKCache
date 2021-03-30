@@ -28,7 +28,7 @@ namespace MKCache.Abstraction
 
         public void Dispose() => _cache.Dispose();
 
-        public void Reset()
+        public void Clear()
         {
             var oldCache = _cache;
             _cache = Create(_options);
