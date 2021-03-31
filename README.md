@@ -11,10 +11,8 @@
 Almost called *yamc*, this is *yet another memory cache*.
 <br />
 This library is a thin layer of abstraction over `Microsoft.Extensions.Caching.Memory.MemoryCache` (.NET Standard 2.0) that **allows to cache an element using more than one key**.
-<br/>
-It does that by creating a different memory cache for each key of an element, so by caching the item multiple times.
-<br/>
-`MKCache` can also be used as a single-key cache.
+
+It achieves that by creating a different memory cache for each key of an element, so by caching the item multiple times. `MKCache` can also be used as a single-key cache.
 
 ## Scenario
 
@@ -128,3 +126,11 @@ and performances, proportionally to the amount of "twin" requests executed concu
 This behavior can be disabled by setting `cache.ReuseRunningAsyncFetchers = false;` (default is `true`).
 
 For a running demo, check out the [sample](samples/MKCache.Sample/) project.
+
+## Continuous Integration
+
+[![github-actions](https://img.shields.io/badge/using-GitHub%20Actions-2088FF)](https://github.com/features/actions)
+[![xUnit](https://img.shields.io/badge/using-xUnit-512bd4)](https://xunit.net/)
+[![coverlet](https://img.shields.io/badge/using-coverlet-512bd4)](https://github.com/coverlet-coverage/coverlet)
+[![coveralls.io](https://img.shields.io/badge/using-coveralls.io-c05547)](https://coveralls.io/)
+[![codefactor.io](https://img.shields.io/badge/using-codefactor.io-35bd97)](https://www.codefactor.io/)
