@@ -130,5 +130,46 @@ namespace MKCache.Tests
             Assert.Throws<ObjectDisposedException>(() =>
                 cache.GetOrCreate("1", () => new Item(), Expiration));
         }
+
+        [Fact]
+        public void Can_set_item()
+        {
+            var cache = new MKCache<Item>(
+               x => x.Id,
+               x => x.Name);
+
+            var item = new Item();
+
+            var existingItem = cache.Get(item.Id);
+            Assert.Null(existingItem);
+
+            cache.Set("", item, Expiration);
+
+            existingItem = cache.Get(item.Id);
+            Assert.NotNull(existingItem);
+        }
+
+        [Fact]
+        public async Task Item_expires()
+        {
+            var cache = new MKCache<Item>(
+               x => x.Id,
+               x => x.Name);
+
+            var item = new Item();
+
+            var existingItem = cache.Get(item.Id);
+            Assert.Null(existingItem);
+
+            cache.Set("", item, TimeSpan.FromMilliseconds(100));
+
+            existingItem = cache.Get(item.Id);
+            Assert.NotNull(existingItem);
+
+            await Task.Delay(3000);
+
+            existingItem = cache.Get(item.Id);
+            Assert.Null(existingItem);
+        }
     }
 }

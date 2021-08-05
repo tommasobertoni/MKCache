@@ -80,16 +80,32 @@ namespace MKCache
         /// </summary>
         /// <param name="key">The key of the item.</param>
         /// <returns>The item, if found.</returns>
-        public virtual T? Get(object key)
+        public T? Get(object key)
         {
             var _ = _cache.TryGetValue(key, out var value);
             return value;
         }
 
         /// <summary>
+        /// Store an item with its key into the cache.
+        /// Note that when using a multi-key cache configuration, the key argument will not be used,
+        /// instead the n-keys will be generated from the item using the <seealso cref="KeyIdentifier"/> delegates.
+        /// </summary>
+        /// <param name="key">The key used to search for the item.</param>
+        /// <param name="item">The item to be stored in the cache.</param>
+        /// <param name="expirationRelativeToNow">Defines how long the cached item should last for, relative to now.</param>
+        public void Set(
+            object key,
+            T item,
+            TimeSpan expirationRelativeToNow)
+        {
+            _cache.Set(key, item, expirationRelativeToNow);
+        }
+
+        /// <summary>
         /// Clears the content of the cache.
         /// </summary>
-        public virtual void Clear()
+        public void Clear()
         {
             _cache.Clear();
         }
@@ -102,7 +118,7 @@ namespace MKCache
         /// <param name="factory">A delegate returning the item, if not found in the cache.</param>
         /// <param name="expirationRelativeToNow">Defines how long the cached item should last for, relative to now.</param>
         /// <returns>The the newly created or cached item.</returns>
-        public virtual T GetOrCreate(
+        public T GetOrCreate(
             string key,
             Func<T> factory,
             TimeSpan expirationRelativeToNow)
@@ -128,7 +144,7 @@ namespace MKCache
         /// <param name="asyncFactory">A delegate returning asynchronously the item, if not found in the cache.</param>
         /// <param name="expirationRelativeToNow">Defines how long the cached item should last for, relative to now.</param>
         /// <returns>The the newly created or cached item.</returns>
-        public virtual async Task<T> GetOrCreateAsync(
+        public async Task<T> GetOrCreateAsync(
             object key,
             Func<Task<T>> asyncFactory,
             TimeSpan expirationRelativeToNow)
