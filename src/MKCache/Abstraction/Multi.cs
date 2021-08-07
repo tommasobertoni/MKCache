@@ -48,6 +48,22 @@ namespace MKCache.Abstraction
             }
         }
 
+        public T? Remove(object key)
+        {
+            foreach (var (cache, _) in _caches)
+            {
+                var item = cache.Get<T>(key);
+
+                if (item is not null)
+                {
+                    cache.Remove(key);
+                    return item;
+                }
+            }
+
+            return default;
+        }
+
         public void Dispose()
         {
             foreach (var (cache, _) in _caches)

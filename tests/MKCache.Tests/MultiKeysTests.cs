@@ -150,7 +150,7 @@ namespace MKCache.Tests
         }
 
         [Fact]
-        public async Task Item_expires()
+        public void Item_can_be_removed()
         {
             var cache = new MKCache<Item>(
                x => x.Id,
@@ -158,15 +158,13 @@ namespace MKCache.Tests
 
             var item = new Item();
 
+            cache.Set(item.Id, item, Expiration);
+
             var existingItem = cache.Get(item.Id);
-            Assert.Null(existingItem);
-
-            cache.Set("", item, TimeSpan.FromMilliseconds(100));
-
-            existingItem = cache.Get(item.Id);
             Assert.NotNull(existingItem);
 
-            await Task.Delay(3000);
+            existingItem = cache.Remove(item.Id);
+            Assert.NotNull(existingItem);
 
             existingItem = cache.Get(item.Id);
             Assert.Null(existingItem);

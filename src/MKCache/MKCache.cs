@@ -103,6 +103,13 @@ namespace MKCache
         }
 
         /// <summary>
+        /// Remove an item from the cache.
+        /// </summary>
+        /// <param name="key">The key of the item.</param>
+        /// <returns>The removed item, or null if not found.</returns>
+        public T? Remove(object key) => _cache.Remove(key);
+
+        /// <summary>
         /// Clears the content of the cache.
         /// </summary>
         public void Clear()

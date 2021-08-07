@@ -56,5 +56,48 @@ namespace MKCache.Tests
             var newItem = await cache.GetOrCreateAsync(item.Id, asyncFactoryMock.Object, expirySpan);
             asyncFactoryMock.Verify(factory => factory(), Times.Exactly(2));
         }
+
+        [Fact]
+        public async Task Single_key_item_expires()
+        {
+            var cache = new MKCache<Item>();
+            var key = "foo";
+
+            var existingItem = cache.Get(key);
+            Assert.Null(existingItem);
+
+            cache.Set(key, new Item(), TimeSpan.FromMilliseconds(100));
+
+            existingItem = cache.Get(key);
+            Assert.NotNull(existingItem);
+
+            await Task.Delay(3000);
+
+            existingItem = cache.Get(key);
+            Assert.Null(existingItem);
+        }
+
+        [Fact]
+        public async Task Multi_key_item_expires()
+        {
+            var cache = new MKCache<Item>(
+               x => x.Id,
+               x => x.Name);
+
+            var item = new Item();
+
+            var existingItem = cache.Get(item.Id);
+            Assert.Null(existingItem);
+
+            cache.Set("", item, TimeSpan.FromMilliseconds(100));
+
+            existingItem = cache.Get(item.Id);
+            Assert.NotNull(existingItem);
+
+            await Task.Delay(3000);
+
+            existingItem = cache.Get(item.Id);
+            Assert.Null(existingItem);
+        }
     }
 }

@@ -10,6 +10,8 @@ namespace MKCache.Abstraction
 
         void Set(object key, T value, TimeSpan expirationRelativeToNow);
 
+        T? Remove(object key);
+
         void Clear();
     }
 }

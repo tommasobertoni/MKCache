@@ -26,6 +26,16 @@ namespace MKCache.Abstraction
             _cache.Set(key, value, expirationRelativeToNow);
         }
 
+        public T? Remove(object key)
+        {
+            var item = _cache.Get<T>(key);
+
+            if (item is not null)
+                _cache.Remove(key);
+
+            return item;
+        }
+
         public void Dispose() => _cache.Dispose();
 
         public void Clear()
