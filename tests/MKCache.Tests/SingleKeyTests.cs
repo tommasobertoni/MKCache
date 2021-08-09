@@ -219,5 +219,15 @@ namespace MKCache.Tests
             existingItem = cache.Get(key);
             Assert.Null(existingItem);
         }
+
+        [Fact]
+        public void Removing_missing_item_does_not_throw()
+        {
+            var cache = new MKCache<Item>();
+            Assert.Equal(0, cache.Count);
+
+            var missing = cache.Remove("foo");
+            Assert.Null(missing);
+        }
     }
 }
